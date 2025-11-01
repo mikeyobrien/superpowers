@@ -87,6 +87,45 @@ git commit -m "feat: add specific feature"
 ```
 ```
 
+## PR Boundary Markers (Optional)
+
+**For plans that will use execute-with-prs:**
+
+Add `---` markers (standalone, line boundaries) between task groups:
+
+```markdown
+### Task 1: Database Layer
+[steps]
+
+### Task 2: User Model
+[steps]
+
+---
+
+### Task 3: API Endpoints
+[steps]
+
+---
+
+### Task 4: Frontend Integration
+[steps]
+```
+
+**Parsing logic:**
+- Each section between `---` markers = one PR
+- Task numbering continues across groups
+- If no `---` markers, entire task list = one PR
+
+**When to use:**
+- Plan will be executed via `execute-with-prs` skill
+- Logical separation points exist (layers, features, components)
+- Want independent review/merge for each group
+
+**When to skip:**
+- Plan executed in single PR
+- All tasks tightly coupled
+- Small plan (< 5 tasks)
+
 ## Remember
 - Exact file paths always
 - Complete code in plan (not "add validation")
